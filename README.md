@@ -17,8 +17,8 @@ There's a great [Railscast about Exception Notification](http://railscasts.com/e
 
 ## Requirements
 
-* Ruby 2.0 or greater
-* Rails 4.0 or greater, Sinatra or another Rack-based application.
+- Ruby 2.0 or greater
+- Rails 4.0 or greater, Sinatra or another Rack-based application.
 
 For previous releases, please checkout [this](#versions).
 
@@ -44,7 +44,7 @@ Rails.application.config.middleware.use ExceptionNotification::Rack,
   }
 ```
 
-**Note**: In order to enable delivery notifications by email make sure you have [ActionMailer configured](#actionmailer-configuration).
+**Note**: In order to enable delivery notifications by email make sure you have [ActionMailer configured](https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
 
 ### Rack/Sinatra
 
@@ -86,24 +86,25 @@ Options -> sections" below.
 
 ExceptionNotification relies on notifiers to deliver notifications when errors occur in your applications. By default, 8 notifiers are available:
 
-* [Campfire notifier](docs/notifiers/campfire.md)
-* [Datadog notifier](docs/notifiers/datadog.md)
-* [Email notifier](docs/notifiers/email.md)
-* [HipChat notifier](docs/notifiers/hipchat.md)
-* [IRC notifier](docs/notifiers/irc.md)
-* [Slack notifier](docs/notifiers/slack.md)
-* [Mattermost notifier](docs/notifiers/mattermost.md)
-* [Teams notifier](docs/notifiers/teams.md)
-* [Amazon SNS](docs/notifiers/sns.md)
-* [Google Chat notifier](docs/notifiers/google_chat.md)
-* [WebHook notifier](docs/notifiers/webhook.md)
+- [Campfire notifier](docs/notifiers/campfire.md)
+- [Datadog notifier](docs/notifiers/datadog.md)
+- [Email notifier](docs/notifiers/email.md)
+- [HipChat notifier](docs/notifiers/hipchat.md)
+- [IRC notifier](docs/notifiers/irc.md)
+- [Slack notifier](docs/notifiers/slack.md)
+- [Mattermost notifier](docs/notifiers/mattermost.md)
+- [Teams notifier](docs/notifiers/teams.md)
+- [Amazon SNS](docs/notifiers/sns.md)
+- [Google Chat notifier](docs/notifiers/google_chat.md)
+- [WebHook notifier](docs/notifiers/webhook.md)
 
 But, you also can easily implement your own [custom notifier](docs/notifiers/custom.md).
 
 ## Error Grouping
+
 In general, exception notification will send every notification when an error occured, which may result in a problem: if your site has a high throughput and an same error raised frequently, you will receive too many notifications during a short period time, your mail box may be full of thousands of exception mails or even your mail server will be slow. To prevent this, you can choose to error errors by using `:error_grouping` option and set it to `true`.
 
-Error grouping has a default formula `log2(errors_count)` to determine if it is needed to send the notification based on the accumulated errors count for specified exception, this makes the notifier only send notification when count is: 1, 2, 4, 8, 16, 32, 64, 128, ... (2**n). You can use `:notification_trigger` to override this default formula.
+Error grouping has a default formula `log2(errors_count)` to determine if it is needed to send the notification based on the accumulated errors count for specified exception, this makes the notifier only send notification when count is: 1, 2, 4, 8, 16, 32, 64, 128, ... (2\*\*n). You can use `:notification_trigger` to override this default formula.
 
 The below shows options used to enable error grouping:
 
@@ -131,16 +132,15 @@ Rails.application.config.middleware.use ExceptionNotification::Rack,
 
 You can choose to ignore certain exceptions, which will make ExceptionNotification avoid sending notifications for those specified. There are three ways of specifying which exceptions to ignore:
 
-* `:ignore_exceptions` - By exception class (i.e. ignore RecordNotFound ones)
+- `:ignore_exceptions` - By exception class (i.e. ignore RecordNotFound ones)
 
-* `:ignore_crawlers`   - From crawler (i.e. ignore ones originated by Googlebot)
+- `:ignore_crawlers` - From crawler (i.e. ignore ones originated by Googlebot)
 
-* `:ignore_if`         - Custom (i.e. ignore exceptions that satisfy some condition)
-
+- `:ignore_if` - Custom (i.e. ignore exceptions that satisfy some condition)
 
 ### :ignore_exceptions
 
-*Array of strings, default: %w{ActiveRecord::RecordNotFound Mongoid::Errors::DocumentNotFound AbstractController::ActionNotFound ActionController::RoutingError ActionController::UnknownFormat}*
+_Array of strings, default: %w{ActiveRecord::RecordNotFound Mongoid::Errors::DocumentNotFound AbstractController::ActionNotFound ActionController::RoutingError ActionController::UnknownFormat}_
 
 Ignore specified exception types. To achieve that, you should use the `:ignore_exceptions` option, like this:
 
@@ -154,11 +154,11 @@ Rails.application.config.middleware.use ExceptionNotification::Rack,
                                         }
 ```
 
-The above will make ExceptionNotifier ignore a *TemplateError* exception, plus the ones ignored by default.
+The above will make ExceptionNotifier ignore a _TemplateError_ exception, plus the ones ignored by default.
 
 ### :ignore_crawlers
 
-*Array of strings, default: []*
+_Array of strings, default: []_
 
 In some cases you may want to avoid getting notifications from exceptions made by crawlers. To prevent sending those unwanted notifications, use the `:ignore_crawlers` option like this:
 
@@ -174,7 +174,7 @@ Rails.application.config.middleware.use ExceptionNotification::Rack,
 
 ### :ignore_if
 
-*Lambda, default: nil*
+_Lambda, default: nil_
 
 Last but not least, you can ignore exceptions based on a condition. Take a look:
 
@@ -198,7 +198,7 @@ Rails' routing middleware uses this strategy, rather than raising an exception, 
 
 ### :ignore_cascade_pass
 
-*Boolean, default: true*
+_Boolean, default: true_
 
 Set to false to trigger notifications when another rack middleware sets the "X-Cascade" header to "pass."
 
@@ -243,7 +243,6 @@ def server_error(exception)
   )
 end
 ```
-
 
 ## Extras
 
@@ -290,7 +289,6 @@ http://github.com/smartinez87/exception_notification/tree/2-3-stable
 If you are running pre-rack Rails then see this tag:
 
 http://github.com/smartinez87/exception_notification/tree/pre-2-3
-
 
 ## Support and tickets
 
