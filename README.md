@@ -44,7 +44,7 @@ Rails.application.config.middleware.use ExceptionNotification::Rack,
   }
 ```
 
-**Note**: In order to enable delivery notifications by email make sure you have [ActionMailer configured](https://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration).
+**Note**: In order to enable delivery notifications by email make sure you have [ActionMailer configured](docs/notifiers/email.md#actionmailer-configuration).
 
 ### Rack/Sinatra
 
